@@ -1,0 +1,37 @@
+﻿@model Mvc_App_Crud.Models.Departamento
+
+@{
+    ViewBag.Title = "Cliente";
+    WebGrid grid = new WebGrid(canPage: false, canSort: false);
+    grid.Bind(Model.Clientes,
+              autoSortAndPage: false
+    );
+}
+
+
+<h2>Pesquisar</h2>
+
+<div>
+    <h4>Departamento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeparatamentoNome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeparatamentoNome)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

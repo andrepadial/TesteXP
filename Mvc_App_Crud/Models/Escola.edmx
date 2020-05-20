@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EscolaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aluno">
+          <Key>
+            <PropertyRef Name="AlunoID" />
+          </Key>
+          <Property Name="AlunoID" Type="int" Nullable="false" />
+          <Property Name="AlunoNome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DepartamentoID" Type="int" Nullable="false" />
+          <Property Name="AssuntoID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Assunto">
+          <Key>
+            <PropertyRef Name="AssuntoID" />
+          </Key>
+          <Property Name="AssuntoID" Type="int" Nullable="false" />
+          <Property Name="Assunto" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="DepartamentoID" />
+          </Key>
+          <Property Name="DepartamentoID" Type="int" Nullable="false" />
+          <Property Name="DeparatamentoNome" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Assunto">
+          <End Role="Assunto" Type="Self.Assunto" Multiplicity="1" />
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assunto">
+              <PropertyRef Name="AssuntoID" />
+            </Principal>
+            <Dependent Role="Aluno">
+              <PropertyRef Name="AssuntoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Depto">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="DepartamentoID" />
+            </Principal>
+            <Dependent Role="Aluno">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EscolaModelStoreContainer">
+          <EntitySet Name="Aluno" EntityType="Self.Aluno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Assunto" EntityType="Self.Assunto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Assunto" Association="Self.FK_Assunto">
+            <End Role="Assunto" EntitySet="Assunto" />
+            <End Role="Aluno" EntitySet="Aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Depto" Association="Self.FK_Depto">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Aluno" EntitySet="Aluno" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EscolaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Aluno">
+          <Key>
+            <PropertyRef Name="AlunoID" />
+          </Key>
+          <Property Name="AlunoID" Type="Int32" Nullable="false" />
+          <Property Name="AlunoNome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DepartamentoID" Type="Int32" Nullable="false" />
+          <Property Name="AssuntoID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Assunto" Relationship="Self.FK_Assunto" FromRole="Aluno" ToRole="Assunto" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_Depto" FromRole="Aluno" ToRole="Departamento" />
+        </EntityType>
+        <EntityType Name="Assunto">
+          <Key>
+            <PropertyRef Name="AssuntoID" />
+          </Key>
+          <Property Name="AssuntoID" Type="Int32" Nullable="false" />
+          <Property Name="Assunto1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Aluno" Relationship="Self.FK_Assunto" FromRole="Assunto" ToRole="Aluno" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="DepartamentoID" />
+          </Key>
+          <Property Name="DepartamentoID" Type="Int32" Nullable="false" />
+          <Property Name="DeparatamentoNome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Aluno" Relationship="Self.FK_Depto" FromRole="Departamento" ToRole="Aluno" />
+        </EntityType>
+        <Association Name="FK_Assunto">
+          <End Role="Assunto" Type="EscolaModel.Assunto" Multiplicity="1" />
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assunto">
+              <PropertyRef Name="AssuntoID" />
+            </Principal>
+            <Dependent Role="Aluno">
+              <PropertyRef Name="AssuntoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Depto">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="DepartamentoID" />
+            </Principal>
+            <Dependent Role="Aluno">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EscolaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Aluno" EntityType="Self.Aluno" />
+          <EntitySet Name="Assunto" EntityType="EscolaModel.Assunto" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" />
+          <AssociationSet Name="FK_Assunto" Association="Self.FK_Assunto">
+            <End Role="Assunto" EntitySet="Assunto" />
+            <End Role="Aluno" EntitySet="Aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Depto" Association="Self.FK_Depto">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Aluno" EntitySet="Aluno" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EscolaModelStoreContainer" CdmEntityContainer="EscolaEntities">
+          <EntitySetMapping Name="Aluno">
+            <EntityTypeMapping TypeName="EscolaModel.Aluno">
+              <MappingFragment StoreEntitySet="Aluno">
+                <ScalarProperty Name="AlunoID" ColumnName="AlunoID" />
+                <ScalarProperty Name="AlunoNome" ColumnName="AlunoNome" />
+                <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
+                <ScalarProperty Name="AssuntoID" ColumnName="AssuntoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Assunto">
+            <EntityTypeMapping TypeName="EscolaModel.Assunto">
+              <MappingFragment StoreEntitySet="Assunto">
+                <ScalarProperty Name="AssuntoID" ColumnName="AssuntoID" />
+                <ScalarProperty Name="Assunto1" ColumnName="Assunto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamento">
+            <EntityTypeMapping TypeName="EscolaModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
+                <ScalarProperty Name="DeparatamentoNome" ColumnName="DeparatamentoNome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

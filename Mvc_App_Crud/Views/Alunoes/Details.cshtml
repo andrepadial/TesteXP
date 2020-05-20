@@ -1,0 +1,42 @@
+﻿@model Mvc_App_Crud.Models.Aluno
+
+@{
+    ViewBag.Title = "Visualizar";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Aluno</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AlunoNome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlunoNome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Assunto.Assunto1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Assunto.Assunto1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Departamento.DeparatamentoNome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departamento.DeparatamentoNome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.AlunoID }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

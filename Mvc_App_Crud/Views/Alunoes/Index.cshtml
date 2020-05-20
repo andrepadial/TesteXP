@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Mvc_App_Crud.Models.Aluno>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Novo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AlunoNome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Assunto.Assunto1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Departamento.DeparatamentoNome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AlunoNome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assunto.Assunto1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Departamento.DeparatamentoNome)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.AlunoID }) |
+            @Html.ActionLink("Visualizar", "Details", new { id=item.AlunoID }) |
+            @Html.ActionLink("Excluir", "Delete", new { id = item.AlunoID }, new { @onClick = "javascript:return " + "confirm('Confirma a exclusão ?')" })
+        </td>
+    </tr>
+}
+
+</table>

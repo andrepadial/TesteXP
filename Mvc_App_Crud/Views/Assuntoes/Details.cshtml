@@ -1,0 +1,26 @@
+﻿@model Mvc_App_Crud.Models.Assunto
+
+@{
+    ViewBag.Title = "Visualizar";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Assunto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Assunto1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Assunto1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.AssuntoID }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>
